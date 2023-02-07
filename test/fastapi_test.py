@@ -2,16 +2,13 @@ from pymongo import MongoClient
 import unittest
 import requests
 
-# TODO change IP and PORT to your fastapi deployment
-# TODO set DATABASE_NAME, COLLECTION_NAME, MONGO_DB_URL, and MONGO_DB_PORT (same as main.py)
-
 IP = "127.0.0.1"       # default: 127.0.0.1
 PORT = "8000"          # default: 8000
 
 DATABASE_NAME = "hotel"
 COLLECTION_NAME = "reservation"
 MONGO_DB_URL = f"mongodb://localhost"   # mongodb://localhost
-MONGO_DB_PORT = 27017                   # 27017      
+MONGO_DB_PORT = 27017                   # 27017
 
 BASE_URL = f"http://{IP}:{PORT}"
 
@@ -21,11 +18,12 @@ mock_name = "JohnDoe"
 mock_name1 = "John Doe"
 
 
-def connect_mongodb():
-    client = MongoClient(f"{MONGO_DB_URL}:{MONGO_DB_PORT}")
-    global db; db = client[DATABASE_NAME]
-    global collection; collection = db[COLLECTION_NAME]
+client = MongoClient(f"{MONGO_DB_URL}:{MONGO_DB_PORT}")
+db = client[DATABASE_NAME]
+collection = db[COLLECTION_NAME]
 
+
+def connect_mongodb():
     collection.delete_many({})
 
     print("MongoClient connected\n")
